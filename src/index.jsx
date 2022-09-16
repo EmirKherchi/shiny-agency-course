@@ -7,10 +7,18 @@ import Header from './Components/Header/index'
 import Error from './Components/Error/index'
 import Survey from './Pages/Survey/index'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { createGlobalStyle } from 'styled-components'
+
+const GlobalStyle = createGlobalStyle`
+    div {
+        font-family: 'Trebuchet MS', Helvetica, sans-serif;
+    }
+`
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <BrowserRouter>
+    <GlobalStyle />
     <Header />
     <div>
       <Routes>

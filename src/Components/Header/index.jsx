@@ -1,23 +1,27 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+import color from '../../utils/style/color'
+
+const StyledLink = styled(Link)`
+  padding: 15px;
+  color: ${color.secondary};
+  text-decoration: none;
+  font-size: 18px;
+  ${(props) =>
+    props.$isFullLink &&
+    `color: white; border-radius: 30px; background-color:${color.primary};`}
+`
 
 function Header() {
   const [questionNumber, setQuestionNumber] = useState(1)
   return (
     <nav>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to={`/survey/${questionNumber}`}>Survey</Link>
-          </li>
-          <li>
-            <Link to={`/freelances`}>Freelances</Link>
-          </li>
-        </ul>
-      </nav>
+      <StyledLink to="/">Home</StyledLink>
+      <StyledLink to={`/survey/${questionNumber}`} $isFullLink>
+        Faire le test
+      </StyledLink>
+      <StyledLink to={`/freelances`}>Freelances</StyledLink>
     </nav>
   )
 }
