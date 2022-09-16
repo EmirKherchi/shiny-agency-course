@@ -5,22 +5,27 @@ import color from '../../utils/style/color'
 
 const CardLabel = styled.span`
   color: ${color.primary};
-  font-size: 22px;
-  font-weight: bold;
+  font-size: 19px;
+  font-weight: 400;
+  margin-right: auto;
+  margin: 0.8rem auto 1.6rem 0;
 `
 const CardImage = styled.img`
   height: 80px;
   width: 80px;
   border-radius: 50%;
+  margin-bottom: 1rem;
 `
 const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: 15px;
   background-color: ${color.backgroundLight};
   border-radius: 30px;
-  width: 350px;
   transition: 200ms;
+  width: 15rem;
   &:hover {
     cursor: pointer;
     box-shadow: 2px 2px 10px #e2e3e9;
