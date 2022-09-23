@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import color from '../../utils/style/color'
 import darkLogo from '../../assets/dark-logo.png'
+import { SurveyContext } from '../../utils/context/SurveyProvider'
 
 const StyledLink = styled(Link)`
   padding: 15px;
@@ -28,15 +29,15 @@ const HeaderLogo = styled.img`
 `
 
 function Header() {
-  const [questionNumber, setQuestionNumber] = useState(1)
+  const { questionsNumber } = useContext(SurveyContext)
   return (
     <HeaderNav>
       <HeaderLogo src={darkLogo} alt="logo" />
       <nav>
         <StyledLink to="/">Home</StyledLink>
         <StyledLink to={`/freelances`}>Profils</StyledLink>
-        <StyledLink to={`/survey/${questionNumber}`} $isFullLink>
-          Faire le test
+        <StyledLink to={`/survey/${questionsNumber}`} $isFullLink>
+          {questionsNumber > 1 ? 'Reprendre le test' : 'Faire le test'}
         </StyledLink>
       </nav>
     </HeaderNav>

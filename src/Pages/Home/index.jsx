@@ -1,6 +1,8 @@
+import { useContext } from 'react'
 import styled from 'styled-components'
 import color from '../../utils/style/color'
 import { Link } from 'react-router-dom'
+import { SurveyContext } from '../../utils/context/SurveyProvider'
 
 const HomeDiv = styled.div`
   background-color: ${color.backgroundLight};
@@ -30,15 +32,17 @@ const BaselineBtn = styled(Link)`
   font-size: 18px;
   text-align: center;
 `
-const questionNumber = 1
+
 function Home() {
+  const { questionsNumber } = useContext(SurveyContext)
+
   return (
     <HomeDiv>
       <Baseline>
         Repérez vos besoins, on s’occupe du reste, avec les meilleurs talents
         <BaselineBtnDiv>
-          <BaselineBtn to={`/survey/${questionNumber}`}>
-            Faire le test
+          <BaselineBtn to={`/survey/${questionsNumber}`}>
+            {questionsNumber > 1 ? 'Reprendre le test' : 'Faire le test'}
           </BaselineBtn>
         </BaselineBtnDiv>
       </Baseline>

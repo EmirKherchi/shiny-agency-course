@@ -27,25 +27,10 @@ const CardsContainer = styled.div`
   grid-template-columns: repeat(2, 1fr);
   margin: 1rem;
 `
-
-// const freelanceProfiles = [
-//   {
-//     name: 'Jane Doe',
-//     jobTitle: 'Devops',
-//   },
-//   {
-//     name: 'John Doe',
-//     jobTitle: 'Developpeur frontend',
-//   },
-//   {
-//     name: 'Jeanne Biche',
-//     jobTitle: 'Développeuse Fullstack',
-//   },
-//   {
-//     name: 'Jeanne Biche',
-//     jobTitle: 'Développeuse Fullstack',
-//   },
-// ]
+const LoaderWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`
 
 function Freelances() {
   const [freelanceProfiles, setFreelanceProfiles] = useState([])
@@ -58,11 +43,7 @@ function Freelances() {
       try {
         const response = await fetch('http://localhost:8000/freelances')
         const data = await response.json()
-        console.log(data.freelancersList)
         setFreelanceProfiles(data.freelancersList)
-        // const { freelancersList } = await response.data
-        // console.log(freelancersList)
-        // setFreelanceProfiles(await freelancersList)
       } catch (error) {
         setFetchError(true)
         console.log(error)
@@ -73,18 +54,20 @@ function Freelances() {
     getFreelanceProfiles()
   }, [])
 
+  if (fetchError) {
+    return <span>Oups il y a eu un problème</span>
+  }
+
   return (
     <div>
       <CardsBaseline>
         <h1>Trouvez votre prestataire</h1>
         <span>Chez Shiny nous réunissons les meilleurs profils pour vous.</span>
       </CardsBaseline>
-      {isDataLoading || fetchError ? (
-        isDataLoading ? (
+      {isDataLoading ? (
+        <LoaderWrapper>
           <Loader />
-        ) : (
-          <p>There is an error</p>
-        )
+        </LoaderWrapper>
       ) : (
         <CardsContainer>
           {freelanceProfiles.map((profile, index) => (
