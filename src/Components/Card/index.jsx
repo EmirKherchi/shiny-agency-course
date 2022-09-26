@@ -4,7 +4,8 @@ import styled from 'styled-components'
 import color from '../../utils/style/color'
 
 const CardLabel = styled.span`
-  color: ${color.primary};
+  color: ${({ theme }) =>
+    theme === 'light' ? color.primary : color.backgroundLight};
   font-size: 19px;
   font-weight: 400;
   margin-right: auto;
@@ -22,8 +23,11 @@ const CardWrapper = styled.div`
   align-items: center;
   justify-content: center;
   padding: 15px;
-  background-color: ${color.backgroundLight};
+  background-color: ${({ theme }) =>
+    theme === 'light' ? color.backgroundLight : color.backgroundDark};
   border-radius: 30px;
+  border: ${({ theme }) =>
+    theme === 'light' ? 'none' : `1px solid ${color.backgroundLight}`};
   transition: 200ms;
   width: 15rem;
   &:hover {
@@ -31,10 +35,10 @@ const CardWrapper = styled.div`
     box-shadow: 2px 2px 10px #e2e3e9;
   }
 `
-function Card({ label, title, picture }) {
+function Card({ label, title, picture, theme }) {
   return (
-    <CardWrapper>
-      <CardLabel> {label} </CardLabel>
+    <CardWrapper theme={theme}>
+      <CardLabel theme={theme}> {label} </CardLabel>
       <CardImage src={picture} alt="freelance" height={80} width={80} />
       <span> {title} </span>
     </CardWrapper>
